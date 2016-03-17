@@ -36,9 +36,14 @@ public class PlayerJoin implements Listener {
 		
 		user = BanManager.mapUsers.get(player.getUniqueId());
 		
+		
 		if (user.getBan() != null)
-			if (!user.getBan().isPermanent())
-				player.kickPlayer("§cVocê está banido.\n\n§cMotivo: §f" + user.getBan().getReason() + "\n§cStaffer: §f" + user.getBan().getStaffer() + "\n§cTermina em: §f" + DateUtil.format(user.getBan().getEnd()));
+			if (!user.getBan().isPermanent()) {
+				if (DateUtil.canJoin(user.getBan().getEnd()))
+					user.setBan(null);
+				else
+					player.kickPlayer("§cVocê está banido.\n\n§cMotivo: §f" + user.getBan().getReason() + "\n§cStaffer: §f" + user.getBan().getStaffer() + "\n§cTermina em: §f" + DateUtil.format(user.getBan().getEnd()));
+			}
 			else
 				player.kickPlayer("§cVocê está banido.\n\n§cMotivo: §f" + user.getBan().getReason() + "\n§cStaffer: §f" + user.getBan().getStaffer());
 	}
