@@ -40,6 +40,10 @@ public class BanManager {
 			this.usersDir.mkdirs();
 	}
 	
+	public boolean existUser(UUID uniqueId) {
+		return new File(this.usersDir, uniqueId.toString()).exists();
+	}
+	
 	public void createBans(Player player) throws IOException {
 		File userDir = new File(this.usersDir, player.getUniqueId().toString());
 		File banFile = new File(userDir, "ban.json");
@@ -53,6 +57,8 @@ public class BanManager {
 		fw.write(banObject.toJSONString());
 		fw.flush();
 		fw.close();
+		
+		mapUsers.put(player.getUniqueId(), new User(player.getUniqueId(), player.getName(), null));
 	}
 	
 	public void loadBans(UUID uniqueId, String userName) throws IOException, ParseException {
