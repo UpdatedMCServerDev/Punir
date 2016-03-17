@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import ban.commands.BanCommand;
 import ban.listeners.PlayerJoin;
 
 public class Ban extends JavaPlugin {
@@ -27,6 +28,6 @@ public class Ban extends JavaPlugin {
 	}
 	
 	private void registerCommands() {
-		
+		getCommand("ban").setExecutor(new BanCommand());
 	}
 }
