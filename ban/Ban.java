@@ -11,7 +11,6 @@ public class Ban extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
-		// TODO Auto-generated method stub
 		super.onDisable();
 	}
 }
